@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         tags = "@login or @addEmployee",
 
         // Readable console output
-        monochrome = true,
+        monochrome = false,
 
         // Report generation
         plugin = {
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
         },
 
         // Will check if any step is not defined in step definition
-        dryRun = true
+        dryRun = false
 )
 
 public class TestRunner {

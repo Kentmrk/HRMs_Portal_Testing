@@ -24,15 +24,36 @@ public class LoginSteps extends CommonMethods {
                 dashboardPage.welcomeMessage.isDisplayed());
     }
 
-    @When("user enters invalid username and password")
-    public void user_enters_invalid_username_and_password() {
-        loginPage.enterUsername("admin234");
-        loginPage.enterPassword("Hum@n");
+    @When("user leaves username empty")
+    public void user_leaves_username_empty() {
+        loginPage.enterUsername("");
     }
 
-    @Then("user is able to see error message")
-    public void user_is_able_to_see_error_message() {
-        String errorValue = loginPage.getErrorMessage();
-        Assert.assertEquals("Invalid credentials", errorValue);
+    @When("enters valid password {string}")
+    public void enters_valid_password(String password) {
+        loginPage.enterPassword(password);
+    }
+
+    @When("user enters valid username {string}")
+    public void user_enters_valid_username(String username) {
+        loginPage.enterUsername(username);
+    }
+
+    @When("leaves password empty")
+    public void leaves_password_empty() {
+        loginPage.enterPassword("");
+    }
+
+    @When("user enters invalid username {string} and password {string}")
+    public void user_enters_invalid_username_and_password(String username, String password) {
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
+    }
+
+    @Then("user gets {string} error message")
+    public void user_gets_error_message(String expectedError) {
+        String actualError = loginPage.getErrorMessage();
+        Assert.assertEquals("Error message does not match",
+                expectedError, actualError);
     }
 }
