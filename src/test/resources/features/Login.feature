@@ -12,6 +12,9 @@ Feature: Login functionality for HRMS Portal
     And enters valid password "Hum@nhrm123"
     And user clicks on login button
     Then user gets "Username cannot be empty" error message
+    When user enters admin username and password
+    And user clicks on login button
+    Then user is able to see dashboard page
 
   @login @error
   Scenario: Empty password validation
@@ -19,9 +22,15 @@ Feature: Login functionality for HRMS Portal
     And leaves password empty
     And user clicks on login button
     Then user gets "Password cannot be empty" error message
+    When user enters admin username and password
+    And user clicks on login button
+    Then user is able to see dashboard page
 
   @login @error
   Scenario: Invalid credentials validation
     When user enters invalid username "WrongAdmin" and password "WrongPass123"
     And user clicks on login button
     Then user gets "Invalid credentials" error message
+    When user enters admin username and password
+    And user clicks on login button
+    Then user is able to see dashboard page
