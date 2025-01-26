@@ -10,9 +10,6 @@ public class AddEmployeePage extends CommonMethods {
     @FindBy(id = "firstName")
     public WebElement firstNameField;
 
-    @FindBy(id = "middleName")
-    public WebElement middleNameField;
-
     @FindBy(id = "lastName")
     public WebElement lastNameField;
 
@@ -22,59 +19,27 @@ public class AddEmployeePage extends CommonMethods {
     @FindBy(id = "btnSave")
     public WebElement saveButton;
 
-    @FindBy(css = ".message.success")
+    @FindBy(className = "message-success")
     public WebElement successMessage;
 
-    @FindBy(css = ".validation-error")
+    @FindBy(xpath = "//span[contains(@class,'error-message')]")
     public WebElement errorMessage;
-
-    @FindBy(id = "photofile")
-    public WebElement photographUpload;
-
-    @FindBy(id = "chkLogin")
-    public WebElement createLoginDetailsCheckbox;
 
     public AddEmployeePage() {
         PageFactory.initElements(driver, this);
     }
 
-    public void enterEmployeeNames(String firstName, String middleName, String lastName) {
-        sendText(firstName, firstNameField);
-        sendText(middleName, middleNameField);
-        sendText(lastName, lastNameField);
-    }
-
-    public void enterEmployeeId(String employeeId) {
-        sendText(employeeId, employeeIdField);
-    }
-
-    public String getEmployeeId() {
-        return employeeIdField.getAttribute("value");
-    }
-
-    public void clickSaveButton() {
-        click(saveButton);
-    }
-
-    public boolean isSuccessMessageDisplayed() {
-        return successMessage.isDisplayed();
-    }
-
-    public String getSuccessMessage() {
-        return successMessage.getText();
-    }
-
-    public String getErrorMessage() {
-        return errorMessage.getText();
-    }
-
-    public void uploadEmployeePhotograph(String filePath) {
-        photographUpload.sendKeys(filePath);
-    }
-
-    public void enableLoginDetailsCreation() {
-        if (!createLoginDetailsCheckbox.isSelected()) {
-            click(createLoginDetailsCheckbox);
+    public String getFieldError(String fieldName) {
+        switch (fieldName.toLowerCase()) {
+            case "firstname" -> {
+                return firstNameField.getAttribute("validationMessage");
+            }
+            case "lastname" -> {
+                return lastNameField.getAttribute("validationMessage");
+            }
+            default -> {
+                return "Field not found";
+            }
         }
     }
 }

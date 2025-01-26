@@ -6,30 +6,26 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        // Features location
-        features = "src/test/resources/features/",
+        // Path to feature files
+        features = "src/test/resources/features",
 
-        // Step definitions location
+        // Path to step definitions
         glue = "steps",
 
-        // What to execute
+        // If true, checks if all steps are defined without running tests
+        dryRun = false,
+
+        // Specify which tests to run using tags
         tags = "@login or @addEmployee",
 
-        // Readable console output
-        monochrome = false,
-
-        // Report generation
+        // Reporting configurations
         plugin = {
-                "pretty",
-                "html:target/cucumber-reports/cucumber-pretty.html",
-                "json:target/cucumber-reports/cucumber.json"
-        },
-
-        // Will check if any step is not defined in step definition
-        dryRun = false
+                "pretty",                                               // Console output
+                "html:target/cucumber-reports/cucumber.html",          // HTML report
+                "json:target/cucumber-reports/cucumber.json"           // JSON report for other tools
+        }
 )
-
 public class TestRunner {
-        // This class should be empty
-        // It's just a runner
+        // This class remains empty
+        // Used only to run tests with configuration from annotations
 }
